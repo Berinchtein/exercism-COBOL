@@ -1,0 +1,45 @@
+       IDENTIFICATION DIVISION.
+       PROGRAM-ID. ROTATIONAL-CIPHER.
+       DATA DIVISION.
+       WORKING-STORAGE SECTION.
+      *
+       01 WS-KEY                 PIC 9(2).
+       01 WS-TEXT                PIC X(128).
+       01 WS-TEXT-TABLE REDEFINES WS-TEXT.
+          05 WS-TT-LETTER        PIC X OCCURS 128 TIMES.
+       01 WS-CIPHER              PIC X(128).
+       01 WS-CIPHER-TABLE REDEFINES WS-CIPHER.
+          05 WS-CT-LETTER        PIC X OCCURS 128 TIMES.
+       01 WS-ITERATOR            PIC 9(3)   VALUE 1.
+       01 WS-CT-LETTER-POSITION  PIC 9(3)   VALUE 0.
+      *
+       PROCEDURE DIVISION.
+      *
+       ROTATIONAL-CIPHER.
+           PERFORM RESET-VALUES.
+           MOVE FUNCTION UPPER-CASE(WS-TEXT) TO WS-TEXT.
+           PERFORM PROCESS-LETTER
+              WITH TEST AFTER
+              VARYING WS-ITERATOR FROM 1 BY 1
+              UNTIL WS-ITERATOR >= 128.
+           MOVE FUNCTION TRIM(WS-CIPHER) TO WS-CIPHER.
+           DISPLAY WS-CIPHER.
+           EXIT.
+      *       
+       RESET-VALUES.
+           MOVE SPACES TO WS-CIPHER.
+           MOVE 1 TO WS-ITERATOR. *> Possibly useless, just in case
+           MOVE 0 TO WS-CT-LETTER-POSITION.
+      *
+       PROCESS-LETTER.
+           ADD FUNCTION ORD(WS-TT-LETTER(WS-ITERATOR)) TO
+              FUNCTION MOD(WS-KEY, 26) GIVING WS-CT-LETTER-POSITION.
+           IF (WS-CT-LETTER-POSITION > FUNCTION ORD('Z'))
+              SUBTRACT 26 FROM WS-CT-LETTER-POSITION
+           END-IF.
+           IF (WS-TT-LETTER(WS-ITERATOR) IS ALPHABETIC)
+              MOVE FUNCTION CHAR(WS-CT-LETTER-POSITION)
+                 TO WS-CT-LETTER(WS-ITERATOR)
+           END-IF.
+      *
+      
