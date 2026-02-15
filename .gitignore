@@ -1,0 +1,13 @@
+# Folders
+cobol/**/.exercism/*
+cobol/**/bin/*
+
+# Specific items
+*.json
+*.properties
+*.ps1
+*.sh
+
+# OS
+.DS_Store
+Thumbs.db
