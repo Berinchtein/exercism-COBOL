@@ -7,6 +7,7 @@ cobol/**/bin/*
 *.properties
 *.ps1
 *.sh
+HELP.md
 
 # OS
 .DS_Store
