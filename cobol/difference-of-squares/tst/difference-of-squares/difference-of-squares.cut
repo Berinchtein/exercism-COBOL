@@ -8,7 +8,7 @@ TestCase "square of sum 5"
 	PERFORM SQUARE-OF-SUM
 	EXPECT WS-SQUARE-OF-SUM = 00000225
 
-TestCase "square of sum 100"
+TestCase "square of sum 100"	
 	MOVE 100 TO WS-NUMBER
 	PERFORM SQUARE-OF-SUM
 	EXPECT WS-SQUARE-OF-SUM = 25502500
