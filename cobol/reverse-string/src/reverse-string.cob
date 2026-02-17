@@ -2,7 +2,7 @@
        PROGRAM-ID. REVERSE-STRING.
        DATA DIVISION.
        WORKING-STORAGE SECTION.
-      *c
+      *
        01 WS-STRING  PIC X(64).
       *
        PROCEDURE DIVISION.
